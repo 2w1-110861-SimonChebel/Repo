@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaApiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="edad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="preFijo" Type="int" Nullable="false" />
+    <Property Name="numero" Type="int" Nullable="false" />
+    <Property Name="idPersona" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Personas_Personas1">
+    <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
+    <End Role="Personas1" Type="Self.Personas" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personas1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tel_Personas">
+    <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
+    <End Role="tel" Type="Self.tel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tel">
+        <PropertyRef Name="idPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="buscarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="PruebaApiModelStoreContainer">
+    <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tel" EntityType="Self.tel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Personas_Personas1" Association="Self.FK_Personas_Personas1">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="Personas1" EntitySet="Personas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tel_Personas" Association="Self.FK_tel_Personas">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="tel" EntitySet="tel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

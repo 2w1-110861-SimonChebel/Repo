@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PruebaApiModelStoreContainer" CdmEntityContainer="PruebaApi">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="PruebaApiModel.Personas">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tel">
+      <EntityTypeMapping TypeName="PruebaApiModel.tel">
+        <MappingFragment StoreEntitySet="tel">
+          <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="preFijo" ColumnName="preFijo" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="buscarPersona" FunctionName="PruebaApiModel.Store.buscarPersona">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PruebaApiModel.buscarPersona_Result">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="prefijo" ColumnName="prefijo" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
